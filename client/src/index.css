@@ -1,133 +1,205 @@
+
+Tú dijiste:
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
 :root {
-  /* Paleta azul frío + gris neomórfico */
-  --blue-primary: oklch(0.58 0.12 250);   /* Azul frío elegante */
-  --blue-secondary: oklch(0.75 0.08 250); /* Azul más claro */
-  --gray-soft: oklch(0.96 0.01 260);      /* Gris suave neomórfico */
-  --gray-text: oklch(0.32 0.01 260);      /* Gris oscuro */
-  --gray-shadow-light: rgba(255, 255, 255, 0.7);
-  --gray-shadow-dark: rgba(0, 0, 0, 0.15);
+  /* Paleta de colores: Blanco y Verde (elegante y moderno) */
+  /* Verde principal: Un verde esmeralda o bosque sutil */
+  --green-primary: oklch(0.4 0.15 140); 
+  /* Verde secundario: Un verde más claro para acentos */
+  --green-secondary: oklch(0.6 0.1 140);
+  /* Blanco puro para fondo */
+  --white-pure: oklch(1 0 0);
+  /* Gris oscuro para texto (elegancia) */
+  --gray-dark: oklch(0.2 0.005 280);
+  /* Gris claro para bordes y muted (moderno) */
+  --gray-light: oklch(0.95 0 0);
 
-  /* Sistema */
-  --background: var(--gray-soft);
-  --foreground: var(--gray-text);
-  --card: var(--gray-soft);
-  --card-foreground: var(--gray-text);
+  /* Aplicación de la paleta */
+  --primary: var(--green-primary);
+  --primary-foreground: var(--white-pure);
+  --sidebar-primary: var(--green-primary);
+  --sidebar-primary-foreground: var(--white-pure);
+  
+  --radius: 0.5rem; /* Más pequeño para un look moderno */
+  --background: var(--white-pure);
+  --foreground: var(--gray-dark);
+  --card: var(--white-pure);
+  --card-foreground: var(--gray-dark);
+  --popover: var(--white-pure);
+  --popover-foreground: var(--gray-dark);
+  --secondary: var(--green-secondary);
+  --secondary-foreground: var(--gray-dark);
+  --muted: var(--gray-light);
+  --muted-foreground: oklch(0.5 0.005 280); /* Gris medio */
+  --accent: var(--green-secondary);
+  --accent-foreground: var(--gray-dark);
+  --destructive: oklch(0.577 0.245 27.325); /* Rojo para errores, se mantiene */
+  --destructive-foreground: var(--white-pure);
+  --border: oklch(0.9 0 0); /* Gris muy claro para bordes sutiles */
+  --input: var(--white-pure);
+  --ring: var(--green-primary);
+  
+  --sidebar: var(--white-pure);
+  --sidebar-foreground: var(--gray-dark);
+  --sidebar-accent: var(--gray-light);
+  --sidebar-accent-foreground: var(--green-primary);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: var(--green-primary);
 
-  --primary: var(--blue-primary);
-  --primary-foreground: white;
-
-  --secondary: var(--blue-secondary);
-  --secondary-foreground: var(--gray-text);
-
-  --accent: var(--blue-secondary);
-  --accent-foreground: var(--gray-text);
-
-  --border: transparent;
-  --input: var(--gray-soft);
-  --ring: var(--blue-primary);
-
-  --radius: 20px; /* Neomorfismo = bordes suaves */
+  /* Colores de gráficos (se mantienen o se ajustan a la paleta si es necesario) */
+  --chart-1: var(--green-primary);
+  --chart-2: var(--green-secondary);
+  --chart-3: oklch(0.7 0.1 140); /* Tono intermedio de verde */
+  --chart-4: oklch(0.8 0.05 140); /* Tono muy claro de verde */
+  --chart-5: oklch(0.3 0.15 140); /* Tono oscuro de verde */
 }
 
-/* 🌙 Modo oscuro futurista */
 .dark {
-  --background: oklch(0.18 0.01 260);
-  --foreground: oklch(0.85 0 0);
+  /* Paleta de colores: Invertida para modo oscuro (elegante y moderno) */
+  --dark-background: oklch(0.15 0.005 280); /* Fondo muy oscuro */
+  --dark-foreground: oklch(0.9 0 0); /* Texto blanco/gris claro */
+  --dark-card: oklch(0.2 0.005 280); /* Tarjetas ligeramente más claras */
+  
+  --primary: var(--green-secondary);
+  --primary-foreground: var(--dark-background);
+  --sidebar-primary: var(--green-secondary);
+  --sidebar-primary-foreground: var(--dark-background);
+  
+  --background: var(--dark-background);
+  --foreground: var(--dark-foreground);
+  --card: var(--dark-card);
+  --card-foreground: var(--dark-foreground);
+  --popover: var(--dark-card);
+  --popover-foreground: var(--dark-foreground);
+  --secondary: var(--green-primary);
+  --secondary-foreground: var(--dark-foreground);
+  --muted: oklch(0.25 0.005 280);
+  --muted-foreground: oklch(0.6 0.005 280);
+  --accent: var(--green-primary);
+  --accent-foreground: var(--dark-foreground);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: var(--dark-background);
+  --border: oklch(0.3 0.005 280);
+  --input: oklch(0.2 0.005 280);
+  --ring: var(--green-secondary);
+  
+  --sidebar: var(--dark-card);
+  --sidebar-foreground: var(--dark-foreground);
+  --sidebar-accent: oklch(0.25 0.005 280);
+  --sidebar-accent-foreground: var(--green-secondary);
+  --sidebar-border: oklch(0.3 0.005 280);
+  --sidebar-ring: var(--green-secondary);
 
-  --card: oklch(0.22 0.01 260);
-  --card-foreground: oklch(0.95 0 0);
-
-  --primary: oklch(0.65 0.12 250);
-  --primary-foreground: black;
-
-  --secondary: oklch(0.5 0.1 250);
-  --secondary-foreground: white;
-
-  --input: oklch(0.22 0.01 260);
-  --accent: oklch(0.55 0.12 250);
-
-  --gray-shadow-light: rgba(255, 255, 255, 0.1);
-  --gray-shadow-dark: rgba(0, 0, 0, 0.5);
+  /* Colores de gráficos (se mantienen o se ajustan a la paleta si es necesario) */
+  --chart-1: var(--green-secondary);
+  --chart-2: var(--green-primary);
+  --chart-3: oklch(0.5 0.1 140);
+  --chart-4: oklch(0.4 0.05 140);
+  --chart-5: oklch(0.7 0.15 140);
 }
 
-/* 🌟 Neomorfismo visual */
 @layer base {
   * {
-    @apply border-0 outline-ring/50;
+    @apply border-border outline-ring/50;
   }
-
   body {
     @apply bg-background text-foreground;
   }
-
-  .neo {
-    background: var(--background);
-    border-radius: var(--radius);
-    box-shadow:
-      4px 4px 10px var(--gray-shadow-dark),
-      -4px -4px 10px var(--gray-shadow-light);
-    transition: 0.2s ease;
-  }
-
-  .neo:active {
-    box-shadow:
-      inset 3px 3px 8px var(--gray-shadow-dark),
-      inset -3px -3px 8px var(--gray-shadow-light);
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
   }
 }
 
 @layer components {
-  /* Botón estilo neomórfico */
-  .btn-neo {
-    background: var(--background);
-    color: var(--foreground);
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    font-weight: 500;
-    box-shadow:
-      5px 5px 12px var(--gray-shadow-dark),
-      -5px -5px 12px var(--gray-shadow-light);
-    transition: 0.2s ease;
-  }
-
-  .btn-neo:hover {
-    box-shadow:
-      3px 3px 8px var(--gray-shadow-dark),
-      -3px -3px 8px var(--gray-shadow-light);
-  }
-
-  .btn-neo:active {
-    box-shadow:
-      inset 3px 3px 7px var(--gray-shadow-dark),
-      inset -3px -3px 7px var(--gray-shadow-light);
-  }
-
-  /* Inputs */
-  .input-neo {
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius);
-    background: var(--background);
-    box-shadow:
-      inset 3px 3px 7px var(--gray-shadow-dark),
-      inset -3px -3px 7px var(--gray-shadow-light);
-  }
-
+  /**
+   * Custom container utility that centers content and adds responsive padding.
+   *
+   * This overrides Tailwind's default container behavior to:
+   * - Auto-center content (mx-auto)
+   * - Add responsive horizontal padding
+   * - Set max-width for large screens
+   *
+   * Usage: <div className="container">...</div>
+   *
+   * For custom widths, use max-w-* utilities directly:
+   * <div className="max-w-6xl mx-auto px-4">...</div>
+   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
+    padding-left: 1rem; /* 16px - mobile padding */
     padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-right: 1.5rem;
+    }
   }
 
   @media (min-width: 1024px) {
     .container {
-      max-width: 1100px;
+      padding-left: 2rem; /* 32px - desktop padding */
+      padding-right: 2rem;
+      max-width: 1280px; /* Standard content width */
     }
   }
-}
+} 
