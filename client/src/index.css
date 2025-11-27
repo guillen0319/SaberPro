@@ -1,78 +1,133 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
 
-/* ======== Tema ======== */
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  --bg: #f5f7fb;
-  --card: #ffffff;
-  --text: #1b1b1f;
-  --text-secondary: #5b5b62;
-  --primary: #4f46e5; /* Indigo */
-  --radius: 12px;
+  /* Paleta azul frío + gris neomórfico */
+  --blue-primary: oklch(0.58 0.12 250);   /* Azul frío elegante */
+  --blue-secondary: oklch(0.75 0.08 250); /* Azul más claro */
+  --gray-soft: oklch(0.96 0.01 260);      /* Gris suave neomórfico */
+  --gray-text: oklch(0.32 0.01 260);      /* Gris oscuro */
+  --gray-shadow-light: rgba(255, 255, 255, 0.7);
+  --gray-shadow-dark: rgba(0, 0, 0, 0.15);
+
+  /* Sistema */
+  --background: var(--gray-soft);
+  --foreground: var(--gray-text);
+  --card: var(--gray-soft);
+  --card-foreground: var(--gray-text);
+
+  --primary: var(--blue-primary);
+  --primary-foreground: white;
+
+  --secondary: var(--blue-secondary);
+  --secondary-foreground: var(--gray-text);
+
+  --accent: var(--blue-secondary);
+  --accent-foreground: var(--gray-text);
+
+  --border: transparent;
+  --input: var(--gray-soft);
+  --ring: var(--blue-primary);
+
+  --radius: 20px; /* Neomorfismo = bordes suaves */
 }
 
-/* Modo oscuro */
+/* 🌙 Modo oscuro futurista */
 .dark {
-  --bg: #0f1117;
-  --card: #161920;
-  --text: #e8e8ec;
-  --text-secondary: #9da3b1;
-  --primary: #6366f1;
+  --background: oklch(0.18 0.01 260);
+  --foreground: oklch(0.85 0 0);
+
+  --card: oklch(0.22 0.01 260);
+  --card-foreground: oklch(0.95 0 0);
+
+  --primary: oklch(0.65 0.12 250);
+  --primary-foreground: black;
+
+  --secondary: oklch(0.5 0.1 250);
+  --secondary-foreground: white;
+
+  --input: oklch(0.22 0.01 260);
+  --accent: oklch(0.55 0.12 250);
+
+  --gray-shadow-light: rgba(255, 255, 255, 0.1);
+  --gray-shadow-dark: rgba(0, 0, 0, 0.5);
 }
 
-/* ======== ESTILOS BASE ======== */
+/* 🌟 Neomorfismo visual */
 @layer base {
-  body {
-    @apply bg-[var(--bg)] text-[var(--text)] font-sans;
+  * {
+    @apply border-0 outline-ring/50;
   }
 
-  h1, h2, h3, h4 {
-    @apply font-semibold;
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .neo {
+    background: var(--background);
+    border-radius: var(--radius);
+    box-shadow:
+      4px 4px 10px var(--gray-shadow-dark),
+      -4px -4px 10px var(--gray-shadow-light);
+    transition: 0.2s ease;
+  }
+
+  .neo:active {
+    box-shadow:
+      inset 3px 3px 8px var(--gray-shadow-dark),
+      inset -3px -3px 8px var(--gray-shadow-light);
   }
 }
 
-/* ======== COMPONENTES ======== */
 @layer components {
-
-  /* --- Tarjetas del dashboard --- */
-  .card {
-    background: var(--card);
+  /* Botón estilo neomórfico */
+  .btn-neo {
+    background: var(--background);
+    color: var(--foreground);
+    padding: 0.6rem 1.2rem;
     border-radius: var(--radius);
-    @apply p-5 shadow-sm transition-all hover:shadow-md;
+    font-weight: 500;
+    box-shadow:
+      5px 5px 12px var(--gray-shadow-dark),
+      -5px -5px 12px var(--gray-shadow-light);
+    transition: 0.2s ease;
   }
 
-  /* --- Botón Primario --- */
-  .btn-primary {
-    @apply px-4 py-2 rounded-lg text-white font-medium shadow;
-    background: var(--primary);
+  .btn-neo:hover {
+    box-shadow:
+      3px 3px 8px var(--gray-shadow-dark),
+      -3px -3px 8px var(--gray-shadow-light);
   }
 
-  .btn-primary:hover {
-    @apply opacity-90;
+  .btn-neo:active {
+    box-shadow:
+      inset 3px 3px 7px var(--gray-shadow-dark),
+      inset -3px -3px 7px var(--gray-shadow-light);
   }
 
-  /* --- Input Estándar --- */
-  .input {
-    @apply w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1c1f26] text-[var(--text)] outline-none focus:ring-2 focus:ring-[var(--primary)];
+  /* Inputs */
+  .input-neo {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    background: var(--background);
+    box-shadow:
+      inset 3px 3px 7px var(--gray-shadow-dark),
+      inset -3px -3px 7px var(--gray-shadow-light);
   }
 
-  /* --- Sidebar --- */
-  .sidebar {
-    @apply h-screen w-64 bg-[var(--card)] fixed top-0 left-0 shadow-lg p-4 flex flex-col gap-4 border-r border-gray-200 dark:border-gray-800;
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  .sidebar-item {
-    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-[var(--text-secondary)] hover:bg-gray-100 dark:hover:bg-[#1c1f26] cursor-pointer transition;
-  }
-
-  .sidebar-item.active {
-    background: var(--primary);
-    color: white;
-  }
-
-  /* --- Topbar --- */
-  .topbar {
-    @apply w-full h-16 bg-[var(--card)] shadow-sm flex items-center justify-between px-6 border-b border-gray-200 dark:border-gray-800;
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1100px;
+    }
   }
 }
