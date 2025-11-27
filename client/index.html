@@ -1,28 +1,53 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full antialiased">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <link rel="icon" type="image/png" href="%VITE_APP_LOGO%" />
-    <link rel="apple-touch-icon" href="%VITE_APP_LOGO%" />
-    <title>%VITE_APP_TITLE%</title>
-    <!-- Add Google Fonts here, example:
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    -->
-  </head>
+<head>
+  <meta charset="UTF-8" />
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
-  </body>
+  <!-- Mobile optimization -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <!-- Title and Icons -->
+  <title>%VITE_APP_TITLE%</title>
+  <link rel="icon" type="image/png" href="%VITE_APP_LOGO%" />
+  <link rel="apple-touch-icon" href="%VITE_APP_LOGO%" />
+
+  <!-- Theme color for mobile status bar -->
+  <meta name="theme-color" content="#1a1a1a" />
+
+  <!-- SEO (editable if you want) -->
+  <meta name="description" content="Aplicación creada con React + Vite." />
+  <meta name="author" content="Tu nombre o empresa" />
+
+  <!-- Google Fonts (Inter, moderna y perfecta para UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Support for dark mode by default -->
+  <script>
+    const userPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (userPrefersDark) document.documentElement.classList.add("dark");
+  </script>
+
+</head>
+
+<body class="h-full bg-background text-foreground font-[Inter]">
+  <div id="root" class="min-h-screen"></div>
+
+  <!-- Vite React root script -->
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Analytics -->
+  <script
+    defer
+    src="%VITE_ANALYTICS_ENDPOINT%/umami"
+    data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"
+  ></script>
+</body>
 
 </html>
