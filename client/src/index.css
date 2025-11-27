@@ -2,134 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* VARIABLES DE COLOR (COMPATIBLE) */
+/* ======== Tema ======== */
 :root {
-  --blue-primary: #4d6bff;
-  --blue-secondary: #7fa1ff;
-  --gray-soft: #f1f1f5;
-  --gray-text: #333;
-  --gray-shadow-light: rgba(255, 255, 255, 0.7);
-  --gray-shadow-dark: rgba(0, 0, 0, 0.15);
-
-  --background: var(--gray-soft);
-  --foreground: var(--gray-text);
-
-  --card: var(--gray-soft);
-  --card-foreground: var(--gray-text);
-
-  --primary: var(--blue-primary);
-  --primary-foreground: #fff;
-
-  --secondary: var(--blue-secondary);
-  --secondary-foreground: var(--gray-text);
-
-  --accent: var(--blue-secondary);
-  --accent-foreground: var(--gray-text);
-
-  --border: transparent;
-  --input: var(--gray-soft);
-  --ring: var(--blue-primary);
-
-  --radius: 20px;
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1b1b1f;
+  --text-secondary: #5b5b62;
+  --primary: #4f46e5; /* Indigo */
+  --radius: 12px;
 }
 
-/* MODO OSCURO */
+/* Modo oscuro */
 .dark {
-  --background: #1c1c25;
-  --foreground: #e6e6e6;
-
-  --card: #24242e;
-  --card-foreground: #ffffff;
-
-  --primary: #6f89ff;
-  --primary-foreground: black;
-
-  --secondary: #5570e6;
-  --secondary-foreground: white;
-
-  --input: #2a2a33;
-  --accent: #6f89ff;
-
-  --gray-shadow-light: rgba(255, 255, 255, 0.1);
-  --gray-shadow-dark: rgba(0, 0, 0, 0.5);
+  --bg: #0f1117;
+  --card: #161920;
+  --text: #e8e8ec;
+  --text-secondary: #9da3b1;
+  --primary: #6366f1;
 }
 
-/* BASES */
+/* ======== ESTILOS BASE ======== */
 @layer base {
   body {
-    @apply bg-[var(--background)] text-[var(--foreground)];
+    @apply bg-[var(--bg)] text-[var(--text)] font-sans;
   }
 
-  * {
-    @apply border-0;
+  h1, h2, h3, h4 {
+    @apply font-semibold;
   }
 }
 
-/* COMPONENTES */
+/* ======== COMPONENTES ======== */
 @layer components {
-  /* Neomorfismo */
-  .neo {
-    background: var(--background);
+
+  /* --- Tarjetas del dashboard --- */
+  .card {
+    background: var(--card);
     border-radius: var(--radius);
-    box-shadow:
-      4px 4px 10px var(--gray-shadow-dark),
-      -4px -4px 10px var(--gray-shadow-light);
-    transition: 0.2s ease;
+    @apply p-5 shadow-sm transition-all hover:shadow-md;
   }
 
-  .neo:active {
-    box-shadow:
-      inset 3px 3px 8px var(--gray-shadow-dark),
-      inset -3px -3px 8px var(--gray-shadow-light);
+  /* --- Botón Primario --- */
+  .btn-primary {
+    @apply px-4 py-2 rounded-lg text-white font-medium shadow;
+    background: var(--primary);
   }
 
-  /* Botón */
-  .btn-neo {
-    background: var(--background);
-    color: var(--foreground);
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    font-weight: 500;
-    box-shadow:
-      5px 5px 12px var(--gray-shadow-dark),
-      -5px -5px 12px var(--gray-shadow-light);
-    transition: 0.2s ease;
+  .btn-primary:hover {
+    @apply opacity-90;
   }
 
-  .btn-neo:hover {
-    box-shadow:
-      3px 3px 8px var(--gray-shadow-dark),
-      -3px -3px 8px var(--gray-shadow-light);
+  /* --- Input Estándar --- */
+  .input {
+    @apply w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1c1f26] text-[var(--text)] outline-none focus:ring-2 focus:ring-[var(--primary)];
   }
 
-  .btn-neo:active {
-    box-shadow:
-      inset 3px 3px 7px var(--gray-shadow-dark),
-      inset -3px -3px 7px var(--gray-shadow-light);
+  /* --- Sidebar --- */
+  .sidebar {
+    @apply h-screen w-64 bg-[var(--card)] fixed top-0 left-0 shadow-lg p-4 flex flex-col gap-4 border-r border-gray-200 dark:border-gray-800;
   }
 
-  /* Input estilo neomórfico */
-  .input-neo {
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius);
-    background: var(--background);
-    box-shadow:
-      inset 3px 3px 7px var(--gray-shadow-dark),
-      inset -3px -3px 7px var(--gray-shadow-light);
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-[var(--text-secondary)] hover:bg-gray-100 dark:hover:bg-[#1c1f26] cursor-pointer transition;
   }
 
-  /* Contenedor general */
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .sidebar-item.active {
+    background: var(--primary);
+    color: white;
   }
 
-  @media (min-width: 1024px) {
-    .container {
-      max-width: 1100px;
-    }
+  /* --- Topbar --- */
+  .topbar {
+    @apply w-full h-16 bg-[var(--card)] shadow-sm flex items-center justify-between px-6 border-b border-gray-200 dark:border-gray-800;
   }
 }
